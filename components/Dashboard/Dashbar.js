@@ -9,18 +9,70 @@ const Dashbar = () => {
 
   return (
     <Nav>
-      <Logo onClick={() => logOut(setUser)} href="/">Origami</Logo>
-      {/* <Home></Home> */}
-      <NavLinks>
-        <ButtonLink href="">About us</ButtonLink>
-        <ButtonLink href="">Support</ButtonLink>
-      </NavLinks>
-
-      <AccountLinks>
-        <SignIn href="">Log in</SignIn>
-        <SignUp href="">Sign up</SignUp>
-      </AccountLinks>
+      <Logo href="/dashboard">Origami</Logo>
+      <Searchbar type="text" placeholder="Search"/>
+      <Buttons>
+        <Button href="">Account</Button>
+      </Buttons>
 
     </Nav>
   );
 };
+
+const Nav = styled.nav`
+display: flex;
+// align-items: center;
+padding-left: 20px;
+padding-top: 12px;
+padding-bottom: 10px;
+text-decoration: none;
+background-color: black;
+// border-bottom: 2px solid white;
+
+`;
+
+const Logo = styled(Link)`
+font-size: 40px;
+text-decoration: none;
+color: white;
+margin-left: 30px;
+flex: 1;
+`;
+
+const Searchbar = styled.input`
+float: right;
+padding: 6px;
+border: none;
+margin-top: 8px;
+margin-right: 16px;
+font-size: 17px;
+width: 25%;
+background: black;
+color: white;
+border: 1px solid grey;
+&:hover {
+    background:rgba(63, 63, 63, 0.68);
+}
+&:focus {
+    background:rgba(63, 63, 63, 0.68);
+}
+outline: none;
+`;
+
+const Buttons = styled.div`
+flex: 1;
+display: flex;
+justify-content: right;
+align-items: center;
+margin-right: 30px;
+`;
+
+const Button = styled(Link)`
+text-decoration: none;
+color: white;
+&:hover {
+  color:rgb(119, 236, 126);
+}
+`;
+
+export default Dashbar;
