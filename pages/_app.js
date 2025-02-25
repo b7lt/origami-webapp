@@ -3,25 +3,30 @@ import { StateContext } from "@/context/StateContext"
 import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
-  * 
-  {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Verdana;
-  }
-  
-  body {
-    background-color: black;
-  }
+:root {
+  --lime: rgb(119, 236, 126);
+}
+
+* 
+{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Verdana;
+}
+
+body {
+  background-color: black;
+  overflow: hidden;
+}
 `
 
 export default function App({ Component, pageProps }) {
   return (
     <>
         <Head>
-          <title>MVP Starter</title>
-          <meta name='description' content='Put a description here about your app'/>
+          <title>Origami: Paper Trading</title>
+          <meta name='description' content='Paper trading, made simple.'/>
           <meta name='robots' content='index, follow'/>
           <link rel="apple-touch-icon" sizes="180x180" href="/favicon_package/apple-touch-icon.png"/>
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon_package/favicon-32x32.png"/>

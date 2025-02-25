@@ -71,7 +71,7 @@ const Button = styled(Link)`
 text-decoration: none;
 color: white;
 &:hover {
-  color:rgb(119, 236, 126);
+  color: var(--lime);
 }
 `;
 
