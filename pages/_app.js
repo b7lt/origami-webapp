@@ -5,6 +5,7 @@ import { createGlobalStyle } from 'styled-components'
 export const GlobalStyle = createGlobalStyle`
 :root {
   --lime: rgb(119, 236, 126);
+  --grey-hover: rgba(63, 63, 63, 0.68);
 }
 
 * 
@@ -16,7 +17,8 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 body {
-  background-color: black;
+  background-color:rgb(16, 16, 16);
+  // background-color: black;
   overflow: hidden;
 }
 `

@@ -33,7 +33,7 @@ padding-top: 5px;
 padding-bottom: 10px;
 text-decoration: none;
 background-color: black;
-border-bottom: 2px solid white;
+border-bottom: 1px solid white;
 
 `;
 
