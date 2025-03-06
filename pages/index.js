@@ -1,6 +1,6 @@
 import Hero from "@/components/LandingPage/Hero"
 import { styled } from 'styled-components'
-import Navbar from "@/components/Dashboard/Navbar"
+import Navbar from "@/components/LandingPage/Navbar"
 import Footer from "@/components/LandingPage/Footer"
 import Link from "next/link"
 export default function Home() {
@@ -11,7 +11,7 @@ export default function Home() {
         <Hero /> */}
         <Main>
           <Header>Paper Trading</Header>
-          <Subheader>Made <span style={{color: "var(--lime);"}}>simple</span>.</Subheader>
+          <Subheader>Made <span style={{color: "var(--lime)"}}>simple</span>.</Subheader>
           {/* <SignUp>Test</SignUp> */}
           <GetStarted href="">Get started</GetStarted>
         </Main>

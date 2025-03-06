@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { useStateContext } from '@/context/StateContext'
 import { isEmailInUse, register} from '@/backend/Auth'
 import Link from 'next/link'
-import Navbar from '@/components/Dashboard/Navbar'
+import Navbar from '@/components/LandingPage/Navbar'
 const Signup = () => {
 
   const { user, setUser } = useStateContext()

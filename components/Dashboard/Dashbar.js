@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { logOut } from '@/backend/Auth';
 import { useStateContext } from '@/context/StateContext';
 
-const Dashbar = () => {
+function Dashbar() {
   const { setUser } = useStateContext()
 
   return (
@@ -71,7 +71,7 @@ const Button = styled(Link)`
 text-decoration: none;
 color: white;
 &:hover {
-  color: var(--lime);
+  color: var(--lime)
 }
 `;
 

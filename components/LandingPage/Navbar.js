@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import Link from 'next/link'
 import { logOut } from '@/backend/Auth';
 import { useStateContext } from '@/context/StateContext';
-import Home from '@/components/Dashboard/Home'
-const Navbar = () => {
+
+function Navbar() {
   const { setUser } = useStateContext()
 
   return (
