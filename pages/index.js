@@ -1,19 +1,22 @@
-import Hero from "@/components/LandingPage/Hero"
 import { styled } from 'styled-components'
 import Navbar from "@/components/LandingPage/Navbar"
 import Footer from "@/components/LandingPage/Footer"
 import Link from "next/link"
+import { useStateContext } from '@/context/StateContext';
+
+
 export default function Home() {
+  const { user } = useStateContext();
+  const MainButton = !user ? <GetStarted href="/auth/signup">Get started</GetStarted> : <GetStarted href="/dashboard">Go to Dashboard</GetStarted>
+
   return (
     <>
         <Navbar/>
-        {/* <Hero text={'WELCOME TO MY CLASS'} />
-        <Hero /> */}
         <Main>
           <Header>Paper Trading</Header>
           <Subheader>Made <span style={{color: "var(--lime)"}}>simple</span>.</Subheader>
           {/* <SignUp>Test</SignUp> */}
-          <GetStarted href="">Get started</GetStarted>
+          {MainButton}
         </Main>
 
         {/* <Footer /> */}

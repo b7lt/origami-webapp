@@ -1,25 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link'
-import { logOut } from '@/backend/Auth';
+import { signOutUser } from '@/backend/Auth';
 import { useStateContext } from '@/context/StateContext';
 
 function Navbar() {
-  const { setUser } = useStateContext()
+  const { user, setUser } = useStateContext()
+  const userLinks = !user ? <AccountLinks><SignIn href="/auth/login">Log in</SignIn><SignUp href="/auth/signup">Sign up</SignUp></AccountLinks> : "logged in";
 
   return (
     <Nav>
-      <Logo onClick={() => logOut(setUser)} href="/">Origami</Logo>
+      <Logo onClick={() => signOutUser(setUser)} href="/">Origami</Logo>
       {/* <Home></Home> */}
       <NavLinks>
         <ButtonLink href="">About us</ButtonLink>
         <ButtonLink href="">Support</ButtonLink>
       </NavLinks>
 
-      <AccountLinks>
-        <SignIn href="">Log in</SignIn>
-        <SignUp href="">Sign up</SignUp>
-      </AccountLinks>
+      {userLinks}
 
     </Nav>
   );

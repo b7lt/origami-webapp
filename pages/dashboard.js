@@ -29,12 +29,12 @@ function Dashboard() {
   ];
 
 
-  // useEffect(() => {
-  //   if(!user){
-  //     router.push('/')
-  //   }else{
-  //   }
-  // }, user)
+  useEffect(() => {
+    if(!user){
+       router.push('/')
+     }else{
+     }
+    }, user);
 
 
   return (

@@ -12,12 +12,13 @@
     "axios": "^1.6.7",
     "babel-plugin-styled-components": "^2.1.4",
     "crypto": "^1.0.1",
-    "firebase": "^10.8.1",
+    "firebase": "^10.14.1",
     "mvp-starter": "file:",
     "next": "13.5.4",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.0.1",
-    "styled-components": "^6.0.8"
+    "styled-components": "^6.0.8",
+    "yahoo-finance2": "^2.13.3"
   }
 }
