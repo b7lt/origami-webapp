@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import Dashbar from '@/components/Dashboard/Dashbar'
 import InvestmentTable  from '@/components/Dashboard/InvestmentTable'
+import AuthLock from '@/components/AuthLock'
 import { useStateContext } from '@/context/StateContext'
 import { useRouter } from 'next/router'
 
@@ -29,27 +30,31 @@ function Dashboard() {
   ];
 
 
-  useEffect(() => {
-    if(!user){
-       router.push('/')
-     }else{
-     }
-    }, user);
+  // useEffect(() => {
+  //   if(!user){
+  //     console.log("no auth for dashboard");
+  //      router.push('/');
+  //    }else{
+  //    }
+  //   }, user);
 
 
   return (
     <Dash>
-      <Dashbar/>
-      <Body>
-        <PositionData>
-          <CurrentPosition>Current Position</CurrentPosition>
-          <CurrentPosition>$15,253.70</CurrentPosition>
-        </PositionData>
-        <Investments>
-          <InvestmentTable id="stocks" name="Stocks" investments={stocks}/>
-          <InvestmentTable id="cryptos" name="Crypto" investments={cryptos}/>
-        </Investments>
-      </Body>
+      <AuthLock>
+        <Dashbar/>
+        <Body>
+          <PositionData>
+            <CurrentPosition>Current Position</CurrentPosition>
+            <CurrentPosition>$15,253.70</CurrentPosition>
+          </PositionData>
+          <Investments>
+            <InvestmentTable id="stocks" name="Stocks" investments={stocks}/>
+            <InvestmentTable id="cryptos" name="Crypto" investments={cryptos}/>
+          </Investments>
+        </Body>
+      </AuthLock>
+
     </Dash>
   );
 };

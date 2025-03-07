@@ -40,11 +40,12 @@ const Signup = () => {
 //     console.log('isValidEmail', isValidEmail)
 //     if(!isValidEmail){ return; }
     
-    try{
-        await registerUser(email, password, setUser)
-        router.push('/dashboard')
-    }catch(err){
-        console.log('Error Signing Up', err)
+    try {
+      await registerUser(email, password, setUser);
+      // Only redirect after successful authentication
+      router.push('/dashboard');
+    } catch (err) {
+      console.log('Error Signing In', err);
     }
   }
 

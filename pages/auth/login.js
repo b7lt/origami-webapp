@@ -21,15 +21,14 @@ const Login = () => {
   const router = useRouter()
 
 
-  async function handleLogin(){
-//    const isValidEmail = await validateEmail()
-//     console.log('isValidEmail', isValidEmail)
-//     if(!isValidEmail){ return; }
-    
-      signInUser(email, password, setUser)
-      .then(router.push('/dashboard'))
-      .catch((err) => console.log('Error Signing In', err));
-      
+  async function handleLogin() {
+    try {
+      await signInUser(email, password, setUser);
+      // Only redirect after successful authentication
+      router.push('/dashboard');
+    } catch (err) {
+      console.log('Error Signing In', err);
+    }
   }
 
 

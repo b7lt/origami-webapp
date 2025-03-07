@@ -9,7 +9,7 @@ function Dashbar() {
 
   return (
     <Nav>
-      <Logo href="/dashboard">Origami</Logo>
+      <Logo href="/">Origami</Logo>
       <Searchbar type="text" placeholder="Search"/>
       <Buttons>
         <Button href="">Account</Button>

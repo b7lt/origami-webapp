@@ -14,8 +14,11 @@ function InvestmentTable(props) {
     props.investments.forEach((investment) => {
         rows.push(
             <TableRow className={props.id == "stocks" ? "stock" : "crypto"} key={investment.name}>
-                <TableItem>{investment.name}</TableItem>
-                <TablePrice>{formatMoney(investment.shares * investment.pricePerShare)}</TablePrice>
+                <TableItem>
+                  <InvestmentName>{investment.name}</InvestmentName>
+                  <InvestmentShares>{investment.shares} {props.id == "stocks" ? "shares" : "coins"}</InvestmentShares>
+                </TableItem>
+                <TablePrice>{formatMoney(investment.shares)}</TablePrice>
              </TableRow>
         );
     });
@@ -67,7 +70,8 @@ const TableBody = styled.tbody`
 const TableRow = styled.tr`
 // border: 1px solid grey;
 // display: block;
-padding-top: 10px;
+margin-top: 10px;
+align-items: center;
 
 &.stock:hover, &.crypto:hover {
   background-color: var(--grey-hover)
@@ -77,11 +81,19 @@ padding-top: 10px;
 const TableItem = styled.td`
 padding: 6px 10px 6px 10px;
 float: left;
+display: flex;
+flex-direction: column;
 `;
 
 const TablePrice = styled.td`
 padding: 8px 10px 8px 5px;
 float: right; 
+`;
+
+const InvestmentName = styled.p`
+`;
+
+const InvestmentShares = styled.p`
 `;
 
 export default InvestmentTable;

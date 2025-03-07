@@ -3,29 +3,33 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, fetchSignIn
   
 export async function registerUser(email, password, setUser)
 {
-    createUserWithEmailAndPassword(auth, email, password)
+    return createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed up
             const user = userCredential.user;
             console.log(`User ${user.email} signed up successfully`);
             setUser(user);
+            return user;
         })
         .catch((error) => {
             console.error(`Error ${error.code}: ${error.message}`);
+            throw error;
         });
 }
 
 export async function signInUser(email, password, setUser)
 {
-    signInWithEmailAndPassword(auth, email, password)
+    return signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed up
             const user = userCredential.user;
             console.log(`User ${user.email} logged up successfully`);
             setUser(user);
+            return user;
         })
         .catch((error) => {
             console.error(`Error ${error.errorCode}: ${error.errorMessage}`);
+            throw error;
         });
 }
 
