@@ -6,10 +6,12 @@ import { useStateContext } from '@/context/StateContext';
 import AssetSearchBar from './AssetSearchBar';
 import { useRouter } from 'next/router';
 import { LuOrigami } from "react-icons/lu";
+import { usePathname } from 'next/navigation';
 
 function Dashbar() {
   const { setUser } = useStateContext()
   const router = useRouter();
+  const currentPage = usePathname();
 
   const handleSelectAsset = (asset, type) => {
     if (type === 'stock') {
@@ -21,10 +23,14 @@ function Dashbar() {
     }
   };
 
+  function handleLogoClick() {
+    if(currentPage == "/dashboard") router.push("/");
+    else router.push("/dashboard");
+  }
   return (
     <Nav>
       <Left>
-        <Logo href="/">
+        <Logo onClick={() => handleLogoClick()}>
           <LuOrigami /> <LogoText>Origami</LogoText>
         </Logo>
       </Left>
@@ -56,12 +62,14 @@ margin-left: 50px;
 flex: 1;
 `;
 
-const Logo = styled(Link)`
+const Logo = styled.div`
 display: flex;
 align-items: center;
 // margin-left: 30px;
 // margin-right: 20px;
 text-decoration: none;
+width: 200px;
+cursor: pointer;
 color: white;
   svg {
     font-size: 45px;

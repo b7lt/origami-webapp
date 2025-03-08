@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import Router from 'next/router';
 
 const formatMoney = (amount, currencyCode = 'USD', locale = 'en-US') => {
     return new Intl.NumberFormat(locale, {
@@ -8,12 +9,17 @@ const formatMoney = (amount, currencyCode = 'USD', locale = 'en-US') => {
     }).format(amount);
   };
 
+function handleClick(investment, type)
+{
+  Router.push(`/${type == "stocks" ? "stocks" : "crypto"}/${investment.ticker}`);
+}
+
 function InvestmentTable(props) {
     const rows = [];
 
     props.investments.forEach((investment) => {
         rows.push(
-            <TableRow className={props.id == "stocks" ? "stock" : "crypto"} key={investment.name}>
+            <TableRow onClick={() => handleClick(investment, props.id)} className={props.id == "stocks" ? "stock" : "crypto"} key={investment.name}>
                 <TableItem>
                   <InvestmentName>{investment.name}</InvestmentName>
                   <InvestmentShares>{investment.shares} {props.id == "stocks" ? "shares" : "coins"}</InvestmentShares>
@@ -72,6 +78,10 @@ const TableRow = styled.tr`
 // display: block;
 margin-top: 10px;
 align-items: center;
+
+&.stock, &.crypto {
+  cursor: pointer;
+}
 
 &.stock:hover, &.crypto:hover {
   background-color: var(--grey-hover)

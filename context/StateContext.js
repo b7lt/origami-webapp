@@ -18,9 +18,9 @@ export const StateContext = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onIdTokenChanged(auth, (user) => {
       if(user){
-        console.log('Token or user state changed:', user)
+        // console.log('Token or user state changed:', user)
         user.getIdToken().then((token) => {
-          console.log('New ID token:', token)
+          // console.log('New ID token:', token)
         })
         setUser(user)
       } else {

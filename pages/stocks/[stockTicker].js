@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
+import Dashbar from '@/components/Dashboard/Dashbar';
 // import Link from 'next/link';
 
-const AnimalPage = () => {
+const StockPage = () => {
   const router = useRouter();
   const { stockTicker } = router.query;
   
   const [stockData, setStockData] = useState(null);
-  const sectionRef = useRef(null);
 
   useEffect(() => {
     if (stockTicker) {
@@ -18,7 +18,7 @@ const AnimalPage = () => {
           headers: {
               'Content-Type': 'application/json'
           },
-          body: JSON.stringify({stock: [stockTicker, "NVDA"]})
+          body: JSON.stringify({stock: stockTicker})
         });
         const json = await data.json();
         
@@ -31,7 +31,8 @@ const AnimalPage = () => {
   }, [stockTicker]);
 
   return (
-    <Section ref={sectionRef}>
+    <Section>
+      <Dashbar/>
       <TopHeader>Stock Info</TopHeader>
       {stockData ? (
         <Content>
@@ -39,20 +40,19 @@ const AnimalPage = () => {
       ) : (
         <p>Loading...</p>
       )}
-      {/*<BackLink href="/">Back to Landing Page</BackLink>*/}
     </Section>
   );
 };
 
 // STYLED COMPONENTS
-const Section = styled.section`
+const Section = styled.div`
   width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+  height: 100%;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // justify-content: center;
+  // padding: 20px;
 `;
 
 const TopHeader = styled.h1`
@@ -65,20 +65,5 @@ const Content = styled.div`
   max-width: 600px;
 `;
 
-const Image = styled.img`
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  margin-top: 10px;
-  border-radius: 10px;
-`;
 
-/*const BackLink = styled(Link)`
-  margin-top: 20px;
-  font-size: 18px;
-  color: blue;
-  text-decoration: underline;
-  cursor: pointer;
-`;*/
-
-export default AnimalPage;
+export default StockPage;
