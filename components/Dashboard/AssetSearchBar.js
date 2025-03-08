@@ -57,7 +57,7 @@ const AssetSearchBar = ({ onSelectAsset }) => {
 
   const fetchAssetResults = async (term) => {
     try {
-      const response = await fetch('/api/assetsearch', {
+      const response = await fetch('/api/stockSearch', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

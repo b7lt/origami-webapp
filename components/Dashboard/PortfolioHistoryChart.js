@@ -32,6 +32,7 @@ const PortfolioHistoryChart = () => {
           });
           
           // format data
+          // need to adjust date seconds so that it displays correctly
           const formattedData = sortedHistory.map(item => ({
             date: item.date ? new Date(item.date.seconds * 1000) : new Date(),
             totalValue: item.totalValue || 0,
@@ -42,7 +43,7 @@ const PortfolioHistoryChart = () => {
             formattedDate: item.date ? new Date(item.date.seconds * 1000).toLocaleDateString() : '',
           }));
 
-          console.log(formattedData)
+          // console.log(formattedData)
           
           setPortfolioData(formattedData);
           
@@ -249,8 +250,8 @@ const HeaderSection = styled.div`
 `;
 
 const CurrentValueText = styled.h2`
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 28px;
+  font-weight: 640;
   color: white;
   margin: 0;
 `;
@@ -273,7 +274,7 @@ const TimePeriodText = styled.span`
 `;
 
 const ChartWrapper = styled.div`
-  height: 256px;
+  height: 320px;
 `;
 
 const TimeRangeButtonsContainer = styled.div`
@@ -285,7 +286,7 @@ const TimeRangeButtonsContainer = styled.div`
 
 const TimeRangeButton = styled.button`
   padding: 4px 12px;
-  border-radius: 20px;
+  border-radius: 8px;
   background-color: #333;
   color: white;
   font-size: 12px;
