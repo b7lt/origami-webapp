@@ -29,7 +29,7 @@ function Navbar() {
 const Nav = styled.nav`
 display: flex;
 align-items: center;
-padding-left: 20px;
+// padding-left: 20px;
 padding-top: 15px;
 padding-bottom: 15px;
 text-decoration: none;
@@ -41,7 +41,7 @@ border-bottom: 1px solid white;
 const Logo = styled(Link)`
 display: flex;
 align-items: center;
-margin-left: 30px;
+margin-left: 50px;
 margin-right: 20px;
 text-decoration: none;
 color: white;

@@ -187,7 +187,7 @@ const AssetSearchBar = ({ onSelectAsset }) => {
 const SearchContainer = styled.div`
   position: relative;
   width: 100%;
-  max-width: 500px;
+  max-width: 640px;
 `;
 
 const SearchInputContainer = styled.div`

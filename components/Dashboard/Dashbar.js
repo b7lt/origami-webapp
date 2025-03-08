@@ -41,8 +41,8 @@ function Dashbar() {
 
 const Nav = styled.nav`
 display: flex;
-// align-items: center;
-padding-left: 20px;
+align-items: center;
+// padding-left: 20px;
 padding-top: 15px;
 padding-bottom: 15px;
 text-decoration: none;
@@ -52,7 +52,7 @@ border-bottom: 1px solid white;
 `;
 
 const Left = styled.div`
-margin-left: 30px;
+margin-left: 50px;
 flex: 1;
 `;
 
@@ -60,7 +60,7 @@ const Logo = styled(Link)`
 display: flex;
 align-items: center;
 // margin-left: 30px;
-margin-right: 20px;
+// margin-right: 20px;
 text-decoration: none;
 color: white;
   svg {
@@ -114,8 +114,10 @@ color: white;
 `;
 
 const SearchContainer = styled.div`
+  display: flex;
   flex: 1;
   margin: 0 16px;
+  justify-content: center;
 `;
 
 export default Dashbar;
