@@ -7,6 +7,7 @@ import AuthLock from '@/components/AuthLock'
 import { useStateContext } from '@/context/StateContext'
 import { useRouter } from 'next/router'
 import { getStockPositions, getCryptoPositions, calculatePortfolioValue } from '@/backend/Database'
+import Chart from '@/components/Dashboard/PortfolioHistoryChart'
 
 function Dashboard() {
 
@@ -107,8 +108,9 @@ function Dashboard() {
         <Dashbar/>
         <Body>
           <PositionData>
-            <CurrentPosition>Current Position</CurrentPosition>
-            <CurrentPosition>{loading ? 'Loading...' : formatCurrency(portfolioValue.totalValue)}</CurrentPosition>
+            {/* <CurrentPosition>Current Position</CurrentPosition>
+            <CurrentPosition>{loading ? 'Loading...' : formatCurrency(portfolioValue.totalValue)}</CurrentPosition> */}
+            <Chart/>
           </PositionData>
           <Investments>
             <InvestmentTable id="stocks" name="Stocks" investments={stocks}/>

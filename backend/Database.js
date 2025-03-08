@@ -1,4 +1,4 @@
-import { doc, setDoc, getDoc, getDocs, collection, query, where, addDoc, serverTimestamp } from "firebase/firestore"
+import { doc, setDoc, getDoc, getDocs, collection, query, where, addDoc, serverTimestamp, orderBy, limit } from "firebase/firestore"
 import { database } from "./Firebase"
 
 // user
@@ -227,7 +227,14 @@ export async function recordPortfolioSnapshot(userId, totalValue, cashBalance, s
 export async function getPortfolioHistory(userId, days = 30) {
   try {
     const historyRef = collection(database, "users", userId, "portfolioHistory");
-    const docs = await getDocs(historyRef);
+    let docs = [];
+    if(days)
+    {
+      const q = query(historyRef, orderBy("date", "desc"), limit(days))
+      docs = await getDocs(q);
+    }
+    else docs = await getDocs(historyRef);
+
     
     const history = [];
     docs.forEach((doc) => {
