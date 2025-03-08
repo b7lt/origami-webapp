@@ -58,7 +58,8 @@ function Dashboard() {
         // Fetch stock positions
         const stockPositions = await getStockPositions(user.uid);
         const formattedStocks = stockPositions.map(position => ({
-          name: position.symbol,
+          name: position.name,
+          ticker: position.symbol,
           shares: position.shares,
           latestPrice: position.latestPrice
         }));
@@ -67,7 +68,8 @@ function Dashboard() {
         // Fetch crypto positions
         const cryptoPositions = await getCryptoPositions(user.uid);
         const formattedCryptos = cryptoPositions.map(position => ({
-          name: position.coinId,
+          name: position.name,
+          ticker: position.coinId,
           shares: position.shares,
           latestPrice: position.latestPrice
         }));
