@@ -9,7 +9,9 @@ function Dashbar() {
 
   return (
     <Nav>
-      <Logo href="/">Origami</Logo>
+      <Left>
+        <Logo href="/">Origami</Logo>
+      </Left>
       <Searchbar type="text" placeholder="Search"/>
       <Buttons>
         <Button href="">Account</Button>
@@ -31,12 +33,17 @@ border-bottom: 1px solid white;
 
 `;
 
+const Left = styled.div`
+margin-left: 30px;
+flex: 1;
+`;
+
 const Logo = styled(Link)`
 font-size: 40px;
 text-decoration: none;
 color: white;
-margin-left: 30px;
-flex: 1;
+// margin-left: 30px;
+// flex: 1;
 `;
 
 const Searchbar = styled.input`
