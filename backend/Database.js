@@ -73,16 +73,30 @@ export async function getStockPositions(userId) {
   }
 }
 
-export async function updateStockPosition(userId, symbol, shares, costBasis, latestPrice = null) {
+export async function updateStockPosition(userId, symbol, shares, costBasis, latestPrice = null, name = null) {
   try {
     const positionRef = doc(database, "users", userId, "positions", symbol);
 
-    await setDoc(positionRef, {
+    // delete the position if user sells everything
+    if (shares === 0) {
+      await deleteDoc(positionRef);
+      console.log(`Deleted stock position for ${symbol}`);
+      return true;
+    }
+
+    const positionData = {
       shares: shares,
       averageCostBasis: costBasis,
       latestPrice: latestPrice,
       lastUpdated: serverTimestamp()
-    }, { merge: true });
+    };
+
+    // add name when user first buys a stock, will be useful to keep to display in dash
+    if (name) {
+      positionData.name = name;
+    }
+
+    await setDoc(positionRef, positionData, { merge: true });
 
     return true;
   } catch (error) {
@@ -112,16 +126,30 @@ export async function getCryptoPositions(userId) {
   }
 }
 
-export async function updateCryptoPosition(userId, coinId, shares, costBasis, latestPrice = null) {
+export async function updateCryptoPosition(userId, coinId, shares, costBasis, latestPrice = null, name = null) {
   try {
     const positionRef = doc(database, "users", userId, "cryptoPositions", coinId);
 
-    await setDoc(positionRef, {
+    // delete if user sells everything
+    if (shares === 0) {
+      await deleteDoc(positionRef);
+      console.log(`Deleted crypto position for ${coinId}`);
+      return true;
+    }
+
+    const positionData = {
       shares: shares,
       averageCostBasis: costBasis,
       latestPrice: latestPrice,
       lastUpdated: serverTimestamp()
-    }, { merge: true });
+    };
+
+    // add name when user first buys crypto
+    if (name) {
+      positionData.name = name;
+    }
+
+    await setDoc(positionRef, positionData, { merge: true });
 
     return true;
   } catch (error) {
