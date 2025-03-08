@@ -13,7 +13,7 @@ const AnimalPage = () => {
   useEffect(() => {
     if (stockTicker) {
       async function fetchData() {
-        const data = await fetch(`/api/stock`, {
+        const data = await fetch(`/api/stockQuote`, {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
