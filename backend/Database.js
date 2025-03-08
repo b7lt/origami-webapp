@@ -1,4 +1,4 @@
-import { doc, setDoc, getDoc, getDocs, collection, query, where, addDoc, serverTimestamp, orderBy, limit } from "firebase/firestore"
+import { doc, setDoc, getDoc, getDocs, collection, query, where, addDoc, serverTimestamp, orderBy, limit, deleteDoc } from "firebase/firestore"
 import { database } from "./Firebase"
 
 // user
@@ -48,6 +48,32 @@ export async function updateUserLastLogin(userId) {
     return true;
   } catch (error) {
     console.error("Error updateUserLastLogin:", error);
+    throw error;
+  }
+}
+
+export async function getUserCashBalance(userId)
+{
+  try {
+    const data = await getUserProfile(userId);
+    return data.cashBalance;
+  }
+  catch (error) {
+    console.error("Error getUserCashBalance:", error);
+    throw error;
+  }
+}
+
+export async function updateUserCashBalance(userId, newCash)
+{
+  try {
+    await setDoc(doc(database, "users", userId), {
+      cashBalance: newCash
+    }, { merge: true });
+
+    return true;
+  } catch (error) {
+    console.error("Error updateUserCashBalance:", error);
     throw error;
   }
 }
