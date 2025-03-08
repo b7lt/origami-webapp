@@ -3,16 +3,31 @@ import styled from 'styled-components';
 import Link from 'next/link'
 import { logOut } from '@/backend/Auth';
 import { useStateContext } from '@/context/StateContext';
+import AssetSearchBar from './AssetSearchBar';
+import { useRouter } from 'next/router';
 
 function Dashbar() {
   const { setUser } = useStateContext()
+  const router = useRouter();
+
+  const handleSelectAsset = (asset, type) => {
+    if (type === 'stock') {
+      // Navigate to stock details page
+      router.push(`/stocks/${asset.symbol}`);
+    } else if (type === 'crypto') {
+      // Navigate to crypto details page
+      router.push(`/cryptos/${asset.id}`);
+    }
+  };
 
   return (
     <Nav>
       <Left>
         <Logo href="/">Origami</Logo>
       </Left>
-      <Searchbar type="text" placeholder="Search"/>
+      <SearchContainer>
+        <AssetSearchBar onSelectAsset={handleSelectAsset} />
+      </SearchContainer>
       <Buttons>
         <Button href="">Account</Button>
       </Buttons>
@@ -80,6 +95,11 @@ color: white;
 &:hover {
   color: var(--lime)
 }
+`;
+
+const SearchContainer = styled.div`
+  flex: 1;
+  margin: 0 16px;
 `;
 
 export default Dashbar;

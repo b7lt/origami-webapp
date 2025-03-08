@@ -251,21 +251,21 @@ export async function getPortfolioHistory(userId, days = 30) {
 }
 
 // calculate value for today
-export async function calculatePortfolioValue(userId) {
+export async function calculatePortfolioValue(userId, stocks = null, cryptos = null) {
   try {
     // get user
     const userProfile = await getUserProfile(userId);
     if (!userProfile) return null;
 
     // stocks
-    const stocks = await getStockPositions(userId);
+    if(!stocks) stocks = await getStockPositions(userId);
     const stocksValue = stocks.reduce((total, position) => {
       const currentPrice = position.latestPrice || position.averageCostBasis;
       return total + (position.shares * currentPrice);
     }, 0);
 
     // cryptos
-    const cryptos = await getCryptoPositions(userId);
+    if(!cryptos) cryptos = await getCryptoPositions(userId);
     const cryptoValue = cryptos.reduce((total, position) => {
       const currentPrice = position.latestPrice || position.averageCostBasis;
       return total + (position.shares * currentPrice);

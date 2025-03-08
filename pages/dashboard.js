@@ -55,7 +55,7 @@ function Dashboard() {
       try {
         setLoading(true);
         
-        // Fetch stock positions
+        //  stocks
         const stockPositions = await getStockPositions(user.uid);
         const formattedStocks = stockPositions.map(position => ({
           name: position.name,
@@ -65,7 +65,7 @@ function Dashboard() {
         }));
         setStocks(formattedStocks);
         
-        // Fetch crypto positions
+        // crypto
         const cryptoPositions = await getCryptoPositions(user.uid);
         const formattedCryptos = cryptoPositions.map(position => ({
           name: position.name,
@@ -75,8 +75,8 @@ function Dashboard() {
         }));
         setCryptos(formattedCryptos);
         
-        // Calculate portfolio value
-        const portfolio = await calculatePortfolioValue(user.uid);
+        // total portfolio
+        const portfolio = await calculatePortfolioValue(user.uid, stockPositions, cryptoPositions);
         if (portfolio) {
           setPortfolioValue(portfolio);
         }
