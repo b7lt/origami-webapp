@@ -95,6 +95,7 @@ const InvestmentName = styled.p`
 
 const InvestmentShares = styled.p`
 color:rgb(191, 191, 191);
+font-size: 15px;
 `;
 
 export default InvestmentTable;

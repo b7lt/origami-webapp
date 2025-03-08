@@ -5,6 +5,7 @@ import { logOut } from '@/backend/Auth';
 import { useStateContext } from '@/context/StateContext';
 import AssetSearchBar from './AssetSearchBar';
 import { useRouter } from 'next/router';
+import { LuOrigami } from "react-icons/lu";
 
 function Dashbar() {
   const { setUser } = useStateContext()
@@ -23,7 +24,9 @@ function Dashbar() {
   return (
     <Nav>
       <Left>
-        <Logo href="/">Origami</Logo>
+        <Logo href="/">
+          <LuOrigami /> <LogoText>Origami</LogoText>
+        </Logo>
       </Left>
       <SearchContainer>
         <AssetSearchBar onSelectAsset={handleSelectAsset} />
@@ -54,11 +57,24 @@ flex: 1;
 `;
 
 const Logo = styled(Link)`
-font-size: 40px;
+display: flex;
+align-items: center;
+// margin-left: 30px;
+margin-right: 20px;
 text-decoration: none;
 color: white;
-// margin-left: 30px;
-// flex: 1;
+  svg {
+    font-size: 45px;
+    margin-right: 10px;
+  }
+
+  &:hover {
+    color: var(--lime);
+  }
+`;
+
+const LogoText = styled.p`
+font-size: 35px;
 `;
 
 const Searchbar = styled.input`

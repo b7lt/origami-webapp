@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Link from 'next/link'
 import { signOutUser } from '@/backend/Auth';
 import { useStateContext } from '@/context/StateContext';
+import { LuOrigami } from "react-icons/lu";
 
 function Navbar() {
   const { user, setUser } = useStateContext()
@@ -10,7 +11,9 @@ function Navbar() {
 
   return (
     <Nav>
-      <Logo onClick={() => signOutUser(setUser)} href="/">Origami</Logo>
+      <Logo onClick={() => signOutUser(setUser)} href="/">
+        <LuOrigami /> <LogoText>Origami</LogoText>
+      </Logo>
       {/* <Home></Home> */}
       <NavLinks>
         <ButtonLink href="">About us</ButtonLink>
@@ -27,8 +30,8 @@ const Nav = styled.nav`
 display: flex;
 align-items: center;
 padding-left: 20px;
-padding-top: 5px;
-padding-bottom: 10px;
+padding-top: 15px;
+padding-bottom: 15px;
 text-decoration: none;
 background-color: black;
 border-bottom: 1px solid white;
@@ -36,9 +39,20 @@ border-bottom: 1px solid white;
 `;
 
 const Logo = styled(Link)`
-font-size: 40px;
+display: flex;
+align-items: center;
+margin-left: 30px;
+margin-right: 20px;
 text-decoration: none;
 color: white;
+  svg {
+    font-size: 45px;
+    margin-right: 10px;
+  }
+`;
+
+const LogoText = styled.p`
+font-size: 35px;
 `;
 
 const NavLinks = styled.div`
