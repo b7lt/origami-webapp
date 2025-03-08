@@ -6,7 +6,7 @@ import InvestmentTable  from '@/components/Dashboard/InvestmentTable'
 import AuthLock from '@/components/AuthLock'
 import { useStateContext } from '@/context/StateContext'
 import { useRouter } from 'next/router'
-
+import { getStockPositions, getCryptoPositions, calculatePortfolioValue } from '@/backend/Database'
 
 function Dashboard() {
 
@@ -14,20 +14,20 @@ function Dashboard() {
 
   const router = useRouter()
   
-  const stocks = [
-    {name: "Tesla", shares: 5, pricePerShare: 256.78},
-    {name: "Microsoft", shares: 2, pricePerShare: 298.45},
-    {name: "Amazon", shares: 10, pricePerShare: 172.65},
-    {name: "Google", shares: 7, pricePerShare: 145.32}
-  ];
+  // const stocks = [
+  //   {name: "Tesla", shares: 5, pricePerShare: 256.78},
+  //   {name: "Microsoft", shares: 2, pricePerShare: 298.45},
+  //   {name: "Amazon", shares: 10, pricePerShare: 172.65},
+  //   {name: "Google", shares: 7, pricePerShare: 145.32}
+  // ];
 
-  const cryptos = [
-    {name: "Bitcoin", shares: 4, pricePerShare: 75000.32},
-    {name: "Ethereum", shares: 10, pricePerShare: 1800.45},
-    {name: "Binance Coin", shares: 15, pricePerShare: 320.12},
-    {name: "Cardano", shares: 500, pricePerShare: 1.23},
-    {name: "Solana", shares: 100, pricePerShare: 90.67}
-  ];
+  // const cryptos = [
+  //   {name: "Bitcoin", shares: 4, pricePerShare: 75000.32},
+  //   {name: "Ethereum", shares: 10, pricePerShare: 1800.45},
+  //   {name: "Binance Coin", shares: 15, pricePerShare: 320.12},
+  //   {name: "Cardano", shares: 500, pricePerShare: 1.23},
+  //   {name: "Solana", shares: 100, pricePerShare: 90.67}
+  // ];
 
 
   // useEffect(() => {
@@ -38,6 +38,66 @@ function Dashboard() {
   //    }
   //   }, user);
 
+  const [stocks, setStocks] = useState([]);
+  const [cryptos, setCryptos] = useState([]);
+  const [portfolioValue, setPortfolioValue] = useState({
+    totalValue: 0,
+    cashBalance: 0,
+    stocksValue: 0,
+    cryptoValue: 0
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchUserData() {
+      if (!user) return;
+      
+      try {
+        setLoading(true);
+        
+        // Fetch stock positions
+        const stockPositions = await getStockPositions(user.uid);
+        const formattedStocks = stockPositions.map(position => ({
+          name: position.symbol,
+          shares: position.shares,
+          latestPrice: position.latestPrice
+        }));
+        setStocks(formattedStocks);
+        
+        // Fetch crypto positions
+        const cryptoPositions = await getCryptoPositions(user.uid);
+        const formattedCryptos = cryptoPositions.map(position => ({
+          name: position.coinId,
+          shares: position.shares,
+          latestPrice: position.latestPrice
+        }));
+        setCryptos(formattedCryptos);
+        
+        // Calculate portfolio value
+        const portfolio = await calculatePortfolioValue(user.uid);
+        if (portfolio) {
+          setPortfolioValue(portfolio);
+        }
+        
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        setLoading(false);
+      }
+    }
+    
+    fetchUserData();
+  }, [user]);
+
+  // Format currency
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(amount);
+  };
+
+
 
   return (
     <Dash>
@@ -46,7 +106,7 @@ function Dashboard() {
         <Body>
           <PositionData>
             <CurrentPosition>Current Position</CurrentPosition>
-            <CurrentPosition>$15,253.70</CurrentPosition>
+            <CurrentPosition>{loading ? 'Loading...' : formatCurrency(portfolioValue.totalValue)}</CurrentPosition>
           </PositionData>
           <Investments>
             <InvestmentTable id="stocks" name="Stocks" investments={stocks}/>

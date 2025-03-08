@@ -26,19 +26,15 @@ const Signup = () => {
         return false;
     }
     console.log('so far so good...')
-    const emailResponse = await isEmailInUse(email)
-    console.log('email response', emailResponse)
-    if(emailResponse.length == 0 ){
-        return false;
-    }
-
-    return true;
+    const emailUsed = await isEmailInUse(email)
+    console.log('email response', emailUsed)
+    return !emailUsed;
 }
 
   async function handleSignup(){
-//    const isValidEmail = await validateEmail()
-//     console.log('isValidEmail', isValidEmail)
-//     if(!isValidEmail){ return; }
+    const isValidEmail = await validateEmail()
+    console.log('isValidEmail', isValidEmail)
+    if(!isValidEmail){ return; }
     
     try {
       await registerUser(email, password, setUser);

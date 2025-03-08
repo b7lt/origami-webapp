@@ -18,7 +18,7 @@ function InvestmentTable(props) {
                   <InvestmentName>{investment.name}</InvestmentName>
                   <InvestmentShares>{investment.shares} {props.id == "stocks" ? "shares" : "coins"}</InvestmentShares>
                 </TableItem>
-                <TablePrice>{formatMoney(investment.shares)}</TablePrice>
+                <TablePrice>{formatMoney(investment.latestPrice)}</TablePrice>
              </TableRow>
         );
     });

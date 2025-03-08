@@ -1,13 +1,17 @@
 import { auth } from "./Firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, fetchSignInMethodsForEmail, signOut } from "firebase/auth";
+import { createUserProfile, updateUserLastLogin } from "./Database";
   
 export async function registerUser(email, password, setUser)
 {
     return createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+        .then(async (userCredential) => {
             // Signed up
             const user = userCredential.user;
             console.log(`User ${user.email} signed up successfully`);
+
+            await createUserProfile(user.uid, user.email);
+
             setUser(user);
             return user;
         })
@@ -20,10 +24,13 @@ export async function registerUser(email, password, setUser)
 export async function signInUser(email, password, setUser)
 {
     return signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed up
+        .then(async (userCredential) => {
+            // Logged in
             const user = userCredential.user;
-            console.log(`User ${user.email} logged up successfully`);
+            console.log(`User ${user.email} logged in successfully`);
+
+            await updateUserLastLogin(user.uid);
+
             setUser(user);
             return user;
         })
@@ -42,4 +49,14 @@ export async function signOutUser(setUser)
     .catch((error) => {
         console.error("Sign out failed");
     })
+}
+
+export async function isEmailInUse(email) {
+    try {
+        const methods = await fetchSignInMethodsForEmail(auth, email);
+        return methods.length > 0;
+    } catch (error) {
+        console.error("Error checking email:", error);
+        return [];
+    }
 }
