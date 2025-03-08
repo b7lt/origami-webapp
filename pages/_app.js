@@ -7,7 +7,8 @@ export const GlobalStyle = createGlobalStyle`
   --lime: rgb(119, 236, 126);
   --orange: #FF5000;
   --grey-hover: rgba(63, 63, 63, 0.68);
-  --background: rgb(16, 16, 16)
+  // --background: rgb(16, 16, 16);
+  --background: black;
 }
 
 * 

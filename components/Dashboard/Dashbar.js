@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import Link from 'next/link'
 import { logOut } from '@/backend/Auth';
@@ -7,11 +7,35 @@ import AssetSearchBar from './AssetSearchBar';
 import { useRouter } from 'next/router';
 import { LuOrigami } from "react-icons/lu";
 import { usePathname } from 'next/navigation';
+import { getUserCashBalance } from '@/backend/Database';
+
+const formatCurrency = (amount) => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(amount);
+};
 
 function Dashbar() {
-  const { setUser } = useStateContext()
+  const { user, setUser } = useStateContext()
   const router = useRouter();
   const currentPage = usePathname();
+  const [userCash, setUserCash] = useState(0);
+  
+  useEffect(() => {
+    async function fetchUserCash() {
+      try {
+        const cash = await getUserCashBalance(user.uid);
+        setUserCash(cash);
+        console.log(userCash);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchUserCash();
+  }, [user])
 
   const handleSelectAsset = (asset, type) => {
     if (type === 'stock') {
@@ -38,6 +62,7 @@ function Dashbar() {
         <AssetSearchBar onSelectAsset={handleSelectAsset} />
       </SearchContainer>
       <Buttons>
+        <UserCash>{formatCurrency(userCash)}</UserCash>
         <Button href="">Account</Button>
       </Buttons>
 
@@ -114,6 +139,7 @@ margin-right: 30px;
 `;
 
 const Button = styled(Link)`
+margin-left: 35px;
 text-decoration: none;
 color: white;
 &:hover {
@@ -126,6 +152,10 @@ const SearchContainer = styled.div`
   flex: 1;
   margin: 0 16px;
   justify-content: center;
+`;
+
+const UserCash = styled.p`
+color: #999;
 `;
 
 export default Dashbar;

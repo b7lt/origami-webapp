@@ -152,9 +152,10 @@ margin-top: 40px;
 `;
 
 const PositionData = styled.div`
-width: 40%;
+width: 43%;
 background-color: black;
-border: 1px solid grey;
+border: 1px solid #333;
+border-radius: 8px;
 padding: 15px;
 `;
 
@@ -165,10 +166,6 @@ flex-direction: column;
 // justify-content: center;
 align-items: center;
 `;
-
-const CurrentPosition = styled.h1`
-font-size: 30px;
-font-weight: normal;`;
 
 
 export default Dashboard

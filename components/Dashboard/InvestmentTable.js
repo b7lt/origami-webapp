@@ -45,14 +45,18 @@ function InvestmentTable(props) {
 
 const Table = styled.table`
 width: 50%;
-border: 1px solid grey;
-border-collapse: collapse;
+border: 1px solid #333;
+// border-collapse: collapse;
 background-color: black;
 
 &#stocks {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   border-bottom: 0;
 }
 &#cryptos {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
   border-top: 0;
 }
 `;
