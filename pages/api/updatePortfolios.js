@@ -5,7 +5,7 @@ import { calculatePortfolioValue } from '@/backend/Database';
 export default async function handler(req, res) {
   // secret api requires secret token!
   const { authorization } = req.headers;
-  const expectedToken = process.env.CRON_SECRET_TOKEN;
+  const expectedToken = process.env.CRON_SECRET;
 
   if (!expectedToken || authorization !== `Bearer ${expectedToken}`) {
     return res.status(401).json({ error: 'Unauthorized' });
