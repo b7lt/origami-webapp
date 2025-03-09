@@ -9,9 +9,12 @@ const formatMoney = (amount, currencyCode = 'USD', locale = 'en-US') => {
     }).format(amount);
   };
 
-function handleClick(investment, type)
-{
-  Router.push(`/${type == "stocks" ? "stocks" : "crypto"}/${investment.ticker}`);
+function handleClick(investment, type) {
+  if (type === "stocks") {
+    Router.push(`/stocks/${investment.ticker}`);
+  } else if (type === "cryptos") {
+    Router.push(`/crypto/${investment.ticker}`); 
+  }
 }
 
 function InvestmentTable(props) {

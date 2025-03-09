@@ -57,30 +57,40 @@ const AssetSearchBar = ({ onSelectAsset }) => {
 
   const fetchAssetResults = async (term) => {
     try {
-      const response = await fetch('/api/stockSearch', {
+      setLoading(true);
+      const results = { stocks: [], cryptos: [] };
+      
+      // search stocks
+      const stockResponse = await fetch('/api/stockSearch', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
-          query: term,
-          searchType: 'both'
-        }),
+        body: JSON.stringify({ query: term }),
       });
-
-      if (!response.ok) {
-        throw new Error('error /api/assetsearch');
+  
+      if (stockResponse.ok) {
+        const stockData = await stockResponse.json();
+        results.stocks = stockData.stocks || [];
       }
-
-      const data = await response.json();
-
-      setResults({
-        stocks: data.stocks,
-        cryptos: data.cryptos
+  
+      // search cryptos
+      const cryptoResponse = await fetch('/api/cryptoSearch', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query: term }),
       });
-      
+  
+      if (cryptoResponse.ok) {
+        const cryptoData = await cryptoResponse.json();
+        results.cryptos = cryptoData.cryptos || [];
+      }
+  
+      setResults(results);
       setShowResults(true);
-
+  
     } catch (error) {
       console.error('Error searching assets:', error);
       setResults({ stocks: [], cryptos: [] });

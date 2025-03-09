@@ -39,11 +39,9 @@ function Dashbar() {
 
   const handleSelectAsset = (asset, type) => {
     if (type === 'stock') {
-      // Navigate to stock details page
       router.push(`/stocks/${asset.symbol}`);
     } else if (type === 'crypto') {
-      // Navigate to crypto details page
-      router.push(`/cryptos/${asset.id}`);
+      router.push(`/crypto/${asset.id}`);
     }
   };
 
