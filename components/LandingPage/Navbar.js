@@ -18,8 +18,8 @@ function Navbar() {
       </Logo>
       {/* <Home></Home> */}
       <NavLinks>
-        <ButtonLink href="">About us</ButtonLink>
-        <ButtonLink href="">Support</ButtonLink>
+        <ButtonLink href="/about">About us</ButtonLink>
+        <ButtonLink href="/contact">Support</ButtonLink>
       </NavLinks>
 
       {userLinks}
