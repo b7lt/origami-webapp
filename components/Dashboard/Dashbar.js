@@ -35,7 +35,7 @@ function Dashbar() {
       }
     }
     fetchUserCash();
-  }, [user])
+  }, [user, userCash])
 
   const handleSelectAsset = (asset, type) => {
     if (type === 'stock') {
@@ -61,7 +61,7 @@ function Dashbar() {
       </SearchContainer>
       <Buttons>
         <UserCash>{formatCurrency(userCash)}</UserCash>
-        <Button href="">Account</Button>
+        <Button href="/account">Account</Button>
       </Buttons>
 
     </Nav>

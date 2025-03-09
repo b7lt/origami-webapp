@@ -7,11 +7,13 @@ import { LuOrigami } from "react-icons/lu";
 
 function Navbar() {
   const { user, setUser } = useStateContext()
-  const userLinks = !user ? <AccountLinks><SignIn href="/auth/login">Log in</SignIn><SignUp href="/auth/signup">Sign up</SignUp></AccountLinks> : "logged in";
+  const userLinks = !user
+  ? <AccountLinks><SignIn href="/auth/login">Log in</SignIn><SignUp href="/auth/signup">Sign up</SignUp></AccountLinks>
+  : <AccountLinks><SignOut onClick={() => signOutUser(setUser)}>Sign Out</SignOut></AccountLinks>
 
   return (
     <Nav>
-      <Logo onClick={() => signOutUser(setUser)} href="/">
+      <Logo href="/">
         <LuOrigami /> <LogoText>Origami</LogoText>
       </Logo>
       {/* <Home></Home> */}
@@ -93,6 +95,21 @@ border: 2px solid white;
 padding: 8px 16px 8px 16px;
 color: black;
 &:hover {
+  color: black;
+  border: 2px solid gray;
+  background: gray;
+}
+`;
+
+const SignOut = styled.div`
+border-radius: 25px;
+background: white;
+border: 2px solid white;
+padding: 8px 16px 8px 16px;
+color: black;
+font-size: 18px;
+&:hover {
+  cursor: pointer;
   color: black;
   border: 2px solid gray;
   background: gray;

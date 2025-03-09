@@ -9,7 +9,7 @@ export async function createUserProfile(userId, email) {
       // uid: userId,
       // email: email,
       displayName: email.split('@')[0],
-      cashBalance: 10000, // Starting with $10,000
+      cashBalance: 100000, // starting with $100,000
       createdAt: serverTimestamp(),
       lastLoginAt: serverTimestamp()
     });
